@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,22 +23,27 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotNull(message="Customer Name is required")
 	@ManyToOne
-	private Customer customer;
-
+	private  Customer customer;
+	
+	@NotNull(message="Order Unique ID is required")
 	@Column(name = "order_unique_id", length = 60)
 	private String order_unique_id;
-
+	
+	@NotNull(message="Remarks is required")
 	@Column(name = "remarks")
 	private String remarks;
-
+	
+	@NotNull(message="Status is required")
 	@Column(name = "status", length = 10)
 	private Integer status;
-
+	
+	@NotNull(message="Date is required")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date orderDate;
-
+	
 	@OneToMany(targetEntity = OrderDetail.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private List<OrderDetail> orderDetails;

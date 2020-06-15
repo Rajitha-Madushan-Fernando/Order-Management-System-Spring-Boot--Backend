@@ -17,7 +17,7 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message="Name is required!")
+	@NotNull(message="Name is required")
 	@Column(name ="customer_name",length = 60)
     private String customer_name;
     

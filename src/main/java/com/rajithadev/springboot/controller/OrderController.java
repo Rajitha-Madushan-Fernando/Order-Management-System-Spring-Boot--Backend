@@ -3,6 +3,8 @@ package com.rajithadev.springboot.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
-	public Order addOrder(@RequestBody Order order) {
+	public Order addOrder(@Valid @RequestBody Order order) {
 		return orderService.addOrder(order);
 	}
 	

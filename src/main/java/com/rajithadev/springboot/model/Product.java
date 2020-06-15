@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "tbl_products")
@@ -16,19 +17,24 @@ public class Product {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+	
+	@NotNull(message="Product Name is required")
 	@Column(name ="name",length = 60)
     private String name;
     
+	@NotNull(message="Code is required")
 	@Column(name ="product_code",length = 60)
     private String product_code;
-
+	
+	@NotNull(message="Price is required")
 	@Column(name ="price",length = 60)
     private BigDecimal price;
 	
+	@NotNull(message="Stock level is required")
 	@Column(name ="unit",length = 60)
     private String unit;
 	
+	@NotNull(message="Status is required")
 	@Column(name ="status",length = 60)
     private Integer status;
 
