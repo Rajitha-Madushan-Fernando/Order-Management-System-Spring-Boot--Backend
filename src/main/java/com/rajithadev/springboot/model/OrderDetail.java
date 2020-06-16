@@ -29,9 +29,6 @@ public class OrderDetail {
 	@Column(name = "quantity", length = 60)
 	private Integer quantity;
 	
-	
-	
-
 	@Override
 	public String toString() {
 		return "OrderDetail [id=" + id + ", product=" + product + ", order_id=" + order_id + ", quantity=" + quantity
