@@ -45,7 +45,7 @@ public class Order {
 	private Date orderDate;
 	
 	@OneToMany(targetEntity = OrderDetail.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "order_id" ,updatable = false)
 	private List<OrderDetail> orderDetails;
 
 

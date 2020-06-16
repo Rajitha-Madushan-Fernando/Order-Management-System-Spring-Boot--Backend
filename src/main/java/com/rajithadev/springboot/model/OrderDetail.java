@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tbl_order_details")
@@ -15,13 +16,16 @@ public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotNull(message="Product is required")
 	@ManyToOne
 	private Product product;
+	
 	
 	@Column(name = "order_id", length = 60)
 	private Integer order_id;
 	
+	@NotNull(message="Quanity is required")
 	@Column(name = "quantity", length = 60)
 	private Integer quantity;
 	

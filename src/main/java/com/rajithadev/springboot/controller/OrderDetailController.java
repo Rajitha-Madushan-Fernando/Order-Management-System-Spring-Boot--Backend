@@ -3,6 +3,7 @@ package com.rajithadev.springboot.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class OrderDetailController {
 	}
 	
 	@RequestMapping("/add")
-	public OrderDetail addOrderDetail(@RequestBody OrderDetail orderDetail) {
+	public OrderDetail addOrderDetail(@Valid @RequestBody OrderDetail orderDetail) {
 		return orderDetailService.addOrderDetail(orderDetail);
 	}
 	
