@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/add")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Order addOrder(@Valid @RequestBody Order order) {
 		return orderService.addOrder(order);
 	}
@@ -34,17 +36,20 @@ public class OrderController {
 	
 	
 	@RequestMapping("/list/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('pm')")
 	public Optional<Order> findById(@PathVariable Long id) {
 		return orderService.findById(id);
 	}
 	
 	
 	@RequestMapping("/list")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('pm')")
 	public List<Order> orderList(){
 		return orderService.orderList();
 	}
 	
 	@RequestMapping("/delete/{id}")	
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteUser(@PathVariable Long id) {
 		return orderService.deleteOrder(id)	;
 	}
