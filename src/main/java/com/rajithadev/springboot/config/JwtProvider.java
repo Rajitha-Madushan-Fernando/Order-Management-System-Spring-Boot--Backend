@@ -19,7 +19,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtProvider {
- 
+	 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
  
     @Value("${rajitha.app.jwtSecret}")
@@ -35,18 +35,11 @@ public class JwtProvider {
         return Jwts.builder()
                     .setSubject((userPrincipal.getUsername()))
                     .setIssuedAt(new Date())
-                    .setExpiration(new Date((new Date()).getTime() + jwtExpiration))
+                    .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
                     .signWith(SignatureAlgorithm.HS512, jwtSecret)
                     .compact();
     }
- 
-    public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser()
-                      .setSigningKey(jwtSecret)
-                      .parseClaimsJws(token)
-                      .getBody().getSubject();
-    }
- 
+    
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
@@ -64,5 +57,12 @@ public class JwtProvider {
         }
         
         return false;
+    }
+    
+    public String getUserNameFromJwtToken(String token) {
+        return Jwts.parser()
+                      .setSigningKey(jwtSecret)
+                      .parseClaimsJws(token)
+                      .getBody().getSubject();
     }
 }

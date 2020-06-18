@@ -29,8 +29,19 @@ public class ProductController {
 	
 	@RequestMapping("/add")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public Product addProduct(@Valid @RequestBody Product product) {
-		return productService.addProduct(product);
+	public Product addProduct(@Valid @RequestBody Product product) throws Exception {
+		
+//		Integer tempProductCode = product.getProduct_code();
+//		if(tempProductCode != null) {
+//			Product productObj = productService.fetchProductByProductCode(tempProductCode);
+//			if(productObj != null) {
+//				throw new Exception("Product with this " +tempProductCode+" is already exist");
+//			}
+//		}
+		
+		Product productObj = null;
+		productObj= productService.addProduct(product);
+		return productObj;
 	}
 	
 	@RequestMapping("/list/{id}")

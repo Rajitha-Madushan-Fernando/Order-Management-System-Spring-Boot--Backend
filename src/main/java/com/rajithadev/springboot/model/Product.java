@@ -23,8 +23,8 @@ public class Product {
     private String name;
     
 	@NotNull(message="Code is required")
-	@Column(name ="product_code",length = 60)
-    private String product_code;
+	@Column(name ="product_code",length = 60, unique=true)
+    private Integer product_code;
 	
 	@NotNull(message="Price is required")
 	@Column(name ="price",length = 60)
@@ -38,13 +38,17 @@ public class Product {
 	@Column(name ="status",length = 60)
     private Integer status;
 
+	public Product() {}
 	
-
+	
+	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", product_code=" + product_code + ", price=" + price
 				+ ", unit=" + unit + ", status=" + status + "]";
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -62,11 +66,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getProduct_code() {
+	public Integer getProduct_code() {
 		return product_code;
 	}
 
-	public void setProduct_code(String product_code) {
+	public void setProduct_code(Integer product_code) {
 		this.product_code = product_code;
 	}
 
@@ -93,6 +97,7 @@ public class Product {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
 	
 	
 	

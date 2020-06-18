@@ -7,22 +7,22 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class SignUpForm {
-    @NotBlank
+	@NotBlank(message ="Full Name is Required")
     @Size(min = 3, max = 50)
     private String name;
  
-    @NotBlank
+	@NotBlank(message ="User Name is Required")
     @Size(min = 3, max = 50)
     private String username;
  
-    @NotBlank
+	@NotBlank(message ="Email is Required")
     @Size(max = 60)
     @Email
     private String email;
     
     private Set<String> role;
     
-    @NotBlank
+    @NotBlank(message ="Password is Required")
     @Size(min = 6, max = 40)
     private String password;
  

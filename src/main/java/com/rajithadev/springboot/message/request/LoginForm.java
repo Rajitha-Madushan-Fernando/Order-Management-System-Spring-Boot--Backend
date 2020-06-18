@@ -1,15 +1,12 @@
 package com.rajithadev.springboot.message.request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 public class LoginForm {
-    @NotBlank
-    @Size(min=3, max = 60)
+    @NotBlank(message ="User Name is Required")
     private String username;
  
-    @NotBlank
-    @Size(min = 6, max = 40)
+    @NotBlank(message ="Password is Required")
     private String password;
  
     public String getUsername() {
