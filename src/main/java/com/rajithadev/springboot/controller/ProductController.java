@@ -22,6 +22,7 @@ import com.rajithadev.springboot.service.ProductService;
 public class ProductController {
 	private ProductService productService;
 	
+
 	@Autowired
 	public ProductController(ProductService productService) {
 		this.productService = productService;
@@ -31,13 +32,14 @@ public class ProductController {
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Product addProduct(@Valid @RequestBody Product product) throws Exception {
 		
-//		Integer tempProductCode = product.getProduct_code();
-//		if(tempProductCode != null) {
-//			Product productObj = productService.fetchProductByProductCode(tempProductCode);
-//			if(productObj != null) {
-//				throw new Exception("Product with this " +tempProductCode+" is already exist");
-//			}
-//		}
+		String tempProductName = product.getName();
+		System.out.println(tempProductName);
+		if(tempProductName != null) {
+			Product productObj = productService.fetchProductName(tempProductName);
+			if(productObj != null) {
+				throw new Exception("Product with this " +tempProductName+" is already exist");
+			}
+		}
 		
 		Product productObj = null;
 		productObj= productService.addProduct(product);

@@ -23,7 +23,7 @@ public class Product {
     private String name;
     
 	@NotNull(message="Code is required")
-	@Column(name ="product_code",length = 60, unique=true)
+	@Column(name ="product_code",length = 60)
     private Integer product_code;
 	
 	@NotNull(message="Price is required")
