@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rajithadev.springboot.model.OrderDetail;
-
+import com.rajithadev.springboot.repository.ProductRepository;
 import com.rajithadev.springboot.service.OrderDetailService;
 
 @RestController
@@ -22,6 +22,7 @@ import com.rajithadev.springboot.service.OrderDetailService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderDetailController {
 	private OrderDetailService orderDetailService;
+	private ProductRepository productRepository;
 
 	@Autowired
 	public OrderDetailController(OrderDetailService orderDetailService) {
@@ -31,6 +32,13 @@ public class OrderDetailController {
 	@RequestMapping("/add")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public OrderDetail addOrderDetail(@Valid @RequestBody OrderDetail orderDetail) {
+		//get current quantity from products
+		//check exist quantity more than entered quantity :
+			//deduct entered quantity from products
+			//update table
+		//Product purchased = productRepository.findById(orderDTO.getProduct().getId());
+		
+		
 		return orderDetailService.addOrderDetail(orderDetail);
 	}
 	
