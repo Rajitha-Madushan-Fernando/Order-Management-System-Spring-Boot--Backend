@@ -14,34 +14,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rajithadev.springboot.model.OrderDetail;
-import com.rajithadev.springboot.repository.ProductRepository;
 import com.rajithadev.springboot.service.OrderDetailService;
+import com.rajithadev.springboot.service.ProductService;
 
 @RestController
 @RequestMapping("/order-detail")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderDetailController {
 	private OrderDetailService orderDetailService;
-	private ProductRepository productRepository;
+	
+	
+	
+	@Autowired
+	private ProductService productService;
 
 	@Autowired
 	public OrderDetailController(OrderDetailService orderDetailService) {
 		this.orderDetailService = orderDetailService;
 	}
 	
+	
+	
 	@RequestMapping("/add")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public OrderDetail addOrderDetail(@Valid @RequestBody OrderDetail orderDetail) {
-		//get current quantity from products
-		//check exist quantity more than entered quantity :
-			//deduct entered quantity from products
-			//update table
-		//Product purchased = productRepository.findById(orderDTO.getProduct().getId());
+	public OrderDetail addOrderDetail(@Valid @RequestBody OrderDetail orderDetail) throws Exception {
+		
+		Integer requestQuantity = orderDetail.getQuantity();
+		//System.out.println(requestQuantity);
+		
+		Long id = orderDetail.getProduct().getId();
+		//System.out.println(id);
+		
+		Integer currentStock = productService.findById(orderDetail.getProduct().getId()).get().getUnit();
+		//System.out.println(stock);
+		if(currentStock == 0) {
+			throw new Exception("Empty stock level!");
+		}
+		else if(requestQuantity > currentStock) {
+			throw new Exception("This Product curernt stock level is "+ currentStock +".");
+		}else {
+			
+			Integer updateStocklevel = currentStock - requestQuantity;
+			productService.findById(id).get().setUnit(updateStocklevel);
+			return orderDetailService.addOrderDetail(orderDetail);
+			
+		}
 		
 		
-		return orderDetailService.addOrderDetail(orderDetail);
 	}
-	
+
 	@RequestMapping("/list/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('pm')")
 	public Optional<OrderDetail> findById(@PathVariable Long id) {

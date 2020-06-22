@@ -32,7 +32,7 @@ public class Product {
 	
 	@NotNull(message="Stock level is required")
 	@Column(name ="unit",length = 60)
-    private String unit;
+    private Integer unit;
 	
 	@NotNull(message="Status is required")
 	@Column(name ="status",length = 60)
@@ -82,11 +82,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public String getUnit() {
+	public Integer getUnit() {
 		return unit;
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(Integer unit) {
 		this.unit = unit;
 	}
 
