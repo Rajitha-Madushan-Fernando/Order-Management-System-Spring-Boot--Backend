@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rajithadev.springboot.exception.ApiRequestException;
 import com.rajithadev.springboot.model.OrderDetail;
 import com.rajithadev.springboot.service.OrderDetailService;
 import com.rajithadev.springboot.service.ProductService;
@@ -37,7 +38,7 @@ public class OrderDetailController {
 	
 	@RequestMapping("/add")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public OrderDetail addOrderDetail(@Valid @RequestBody OrderDetail orderDetail) throws Exception {
+	public OrderDetail addOrderDetail(@Valid @RequestBody OrderDetail orderDetail) {
 		
 		Integer requestQuantity = orderDetail.getQuantity();
 		//System.out.println(requestQuantity);
@@ -48,10 +49,11 @@ public class OrderDetailController {
 		Integer currentStock = productService.findById(orderDetail.getProduct().getId()).get().getUnit();
 		//System.out.println(stock);
 		if(currentStock == 0) {
-			throw new Exception("Empty stock level!");
+			throw new ApiRequestException("This Product curernt stock level is "+ currentStock +".");
 		}
 		else if(requestQuantity > currentStock) {
-			throw new Exception("This Product curernt stock level is "+ currentStock +".");
+			throw new ApiRequestException("This Product curernt stock level is "+ currentStock +".");
+			//throw new Exception("This Product curernt stock level is "+ currentStock +".");
 		}else {
 			
 			Integer updateStocklevel = currentStock - requestQuantity;
@@ -59,6 +61,7 @@ public class OrderDetailController {
 			return orderDetailService.addOrderDetail(orderDetail);
 			
 		}
+		
 		
 		
 	}

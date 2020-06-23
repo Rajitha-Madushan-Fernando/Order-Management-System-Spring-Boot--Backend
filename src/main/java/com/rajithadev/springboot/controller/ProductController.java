@@ -46,6 +46,7 @@ public class ProductController {
 		return productObj;
 	}
 	
+	
 	@RequestMapping("/list/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('PM')")
 	public Optional<Product>findById(@PathVariable Long id){
