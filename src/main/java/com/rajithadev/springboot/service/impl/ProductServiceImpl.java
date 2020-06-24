@@ -41,10 +41,7 @@ public class ProductServiceImpl implements ProductService{
 		 return "{'Message' : 'Product deleted Successfully'}";
 	}
 
-	@Override
-	public Product fetchProductName(String name) {
-		return productRepository.findByName(name);
-	}
+
 
 
 	

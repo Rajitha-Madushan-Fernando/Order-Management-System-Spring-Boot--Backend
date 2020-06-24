@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rajithadev.springboot.exception.ApiRequestException;
 import com.rajithadev.springboot.model.Product;
 import com.rajithadev.springboot.service.ProductService;
 
@@ -30,17 +31,17 @@ public class ProductController {
 	
 	@RequestMapping("/add")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public Product addProduct(@Valid @RequestBody Product product) throws Exception {
+	public Product addProduct(@Valid @RequestBody Product product)  {
 		
-		String tempProductName = product.getName();
-		System.out.println(tempProductName);
-		if(tempProductName != null) {
-			Product productObj = productService.fetchProductName(tempProductName);
-			if(productObj != null) {
-				throw new Exception("Product with this " +tempProductName+" is already exist");
-			}
-		}
-		
+//		Integer tempProductName = product.getProduct_code();
+//		System.out.println(tempProductName);
+//		if(tempProductName != null) {
+//			Product productObj = productService.fetchProductByProductCode(tempProductName);
+//			if(productObj != null) {
+//				throw new ApiRequestException("Product with this " +tempProductName+" is already exist");
+//			}
+//		}
+//		
 		Product productObj = null;
 		productObj= productService.addProduct(product);
 		return productObj;

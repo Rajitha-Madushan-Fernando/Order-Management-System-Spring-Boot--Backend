@@ -49,11 +49,10 @@ public class OrderDetailController {
 		Integer currentStock = productService.findById(orderDetail.getProduct().getId()).get().getUnit();
 		//System.out.println(stock);
 		if(currentStock == 0) {
-			throw new ApiRequestException("This Product curernt stock level is "+ currentStock +".");
+			throw new ApiRequestException("Empty Stock Level!");
 		}
 		else if(requestQuantity > currentStock) {
 			throw new ApiRequestException("This Product curernt stock level is "+ currentStock +".");
-			//throw new Exception("This Product curernt stock level is "+ currentStock +".");
 		}else {
 			
 			Integer updateStocklevel = currentStock - requestQuantity;
