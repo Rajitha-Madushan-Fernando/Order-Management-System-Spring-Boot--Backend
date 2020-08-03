@@ -18,9 +18,9 @@ import com.rajithadev.springboot.model.OrderDetail;
 import com.rajithadev.springboot.service.OrderDetailService;
 import com.rajithadev.springboot.service.ProductService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/order-detail")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderDetailController {
 	private OrderDetailService orderDetailService;
 	

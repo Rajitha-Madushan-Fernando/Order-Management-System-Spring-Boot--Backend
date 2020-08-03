@@ -33,7 +33,7 @@ import com.rajithadev.springboot.repository.UserRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class UserController{
  
 	@Autowired

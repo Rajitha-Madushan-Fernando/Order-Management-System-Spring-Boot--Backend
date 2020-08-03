@@ -17,9 +17,9 @@ import com.rajithadev.springboot.exception.ApiRequestException;
 import com.rajithadev.springboot.model.Product;
 import com.rajithadev.springboot.service.ProductService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/product")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
 	private ProductService productService;
 	

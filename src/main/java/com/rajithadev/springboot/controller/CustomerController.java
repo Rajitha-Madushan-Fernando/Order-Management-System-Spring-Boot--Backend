@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rajithadev.springboot.model.Customer;
 import com.rajithadev.springboot.service.CustomerService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerController {
 	private CustomerService customerService;
 	
@@ -34,7 +34,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping("/list/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('PM')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('PM')")
 	public Optional<Customer>findById(@PathVariable Long id){
 		return customerService.findById(id);
 	}

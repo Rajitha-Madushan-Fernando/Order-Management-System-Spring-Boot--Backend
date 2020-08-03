@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rajithadev.springboot.model.Order;
 import com.rajithadev.springboot.service.OrderService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/order")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OrderController {
 	private OrderService orderService;
 	
